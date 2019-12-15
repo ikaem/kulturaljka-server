@@ -1,0 +1,19 @@
+{
+  "name": "kulturaljka-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikaem/kulturaljka-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ikaem/kulturaljka-server/issues"
+  },
+  "homepage": "https://github.com/ikaem/kulturaljka-server#readme"
+}
