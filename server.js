@@ -17,6 +17,8 @@ const knex = require("knex")({
         }
     })
 
+    //     "nodemon": "^2.0.2"
+
 
 
 
