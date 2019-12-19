@@ -76,7 +76,7 @@ app.post("/login", (req, res) => {
                 const passCheck = false;
                 bcrypt.compare(password, data[0].hash, function(err, match){
                     if(err){
-                        console.log("error checking credentials: ", err);
+                        console.log("errror checking credentials: ", err);
                         return res.status(400).json({
                             data: err, 
                             message: "error checking credentials"
