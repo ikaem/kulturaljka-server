@@ -3,13 +3,26 @@ const database = require("./tempDatabase");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const knex = require("knex")({
-    client: "pg",
-    connection: {
-        host: '127.0.0.1',
-        user: "postgres",
-        password: "anVvPRpp",
-        database: 'kulturaljka'
+    development: {
+        client: "pg",
+        connection: {
+            host: '127.0.0.1',
+            user: "postgres",
+            password: "anVvPRpp",
+            database: 'kulturaljka'
+        }
+    },
+    production: {
+        client: "pg",
+        connection: process.env.DATABASE_URL,
+        migrations: {
+            directory: __dirname + "/db/migrations",
+        },
+        seeds: {
+            directory: __dirname + "/db/seeds/production",
+        }
     }
+
 });
 
 const db = knex;
