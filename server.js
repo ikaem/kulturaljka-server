@@ -46,8 +46,8 @@ const knex = require("knex")({
 
 
 const db = knex;
-const artists = database.artists;
-const users = database.users;
+/* const artists = database.artists;
+const users = database.users; */
 
 const app = express();
 
@@ -59,7 +59,7 @@ app.use(cors());
 // -------------  // ENDPOINTS START // -------------- //
 // "/"GET - fetch all artists
 app.get("/", (req, res) => {
-    res.json(artists);
+    res.json("It works");
 })
 // "/login"POST - receive login data and return response
 app.post("/login", (req, res) => {
