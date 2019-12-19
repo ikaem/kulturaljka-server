@@ -12,7 +12,7 @@ const knex = require("knex")({
         // }
         client: "pg",
         connection: {
-            connectionString: env.process.DATABASE_URL,
+            connectionString: process.env.DATABASE_URL,
             ssl: true
         }
     })
