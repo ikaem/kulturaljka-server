@@ -3,18 +3,49 @@ const database = require("./tempDatabase");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const knex = require("knex")({
-    client: "pg",
-    connection: {
-        host: '127.0.0.1',
-        user: "postgres",
-        password: "anVvPRpp",
-        database: 'kulturaljka'
-    }
-});
+        // client: "pg",
+        // connection: {
+        //     host: '127.0.0.1',
+        //     user: "postgres",
+        //     password: "anVvPRpp",
+        //     database: 'kulturaljka'
+        // }
+        client: "pg",
+        connection: {
+            connectionString: env.process.DATABASE_URL,
+            ssl: true
+        }
+    })
+
+    //     "nodemon": "^2.0.2"
+
+
+
+
+//     development: {
+//         client: "pg",
+//         connection: {
+//             host: '127.0.0.1',
+//             user: "postgres",
+//             password: "anVvPRpp",
+//             database: 'kulturaljka'
+//         }
+//     },
+//     production: {
+//         client: "pg",
+//         connection: process.env.DATABASE_URL,
+// /*        migrations: {
+//             directory: __dirname + "/db/migrations",
+//         },
+//          seeds: {
+//             directory: __dirname + "/db/seeds/production",
+//         } */
+//     }
+
+// });
+
 
 const db = knex;
-
-
 const artists = database.artists;
 const users = database.users;
 
@@ -45,7 +76,7 @@ app.post("/login", (req, res) => {
                 const passCheck = false;
                 bcrypt.compare(password, data[0].hash, function(err, match){
                     if(err){
-                        console.log("error checking credentials: ", err);
+                        console.log("errror checking credentials: ", err);
                         return res.status(400).json({
                             data: err, 
                             message: "error checking credentials"
@@ -199,6 +230,8 @@ app.put("/updateartist", (req, res) => {
 
 
 // -------------  // ENDPOINTS END // -------------- //
-app.listen(5000, () => {
-    console.log("The server is running on port 5000");
+
+const PORT = process.env.PORT? process.env.PORT: 5000;
+app.listen(PORT, () => {
+    console.log(`The server is running on port ${PORT}`);
 })
