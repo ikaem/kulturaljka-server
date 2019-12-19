@@ -10,7 +10,7 @@ const knex = require("knex")({
         //     password: "anVvPRpp",
         //     database: 'kulturaljka'
         // }
-         client: "pg",
+        client: "pg",
         connection: {
             connectionString: process.env.DATABASE_URL,
             ssl: true
