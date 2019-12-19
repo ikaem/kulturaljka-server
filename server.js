@@ -3,7 +3,6 @@ const database = require("./tempDatabase");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const knex = require("knex")({
-    development: {
         client: "pg",
         connection: {
             host: '127.0.0.1',
@@ -11,23 +10,35 @@ const knex = require("knex")({
             password: "anVvPRpp",
             database: 'kulturaljka'
         }
-    },
-    production: {
-        client: "pg",
-        connection: process.env.DATABASE_URL,
-        migrations: {
-            directory: __dirname + "/db/migrations",
-        },
-        seeds: {
-            directory: __dirname + "/db/seeds/production",
-        }
-    }
+    })
 
-});
+
+
+
+//     development: {
+//         client: "pg",
+//         connection: {
+//             host: '127.0.0.1',
+//             user: "postgres",
+//             password: "anVvPRpp",
+//             database: 'kulturaljka'
+//         }
+//     },
+//     production: {
+//         client: "pg",
+//         connection: process.env.DATABASE_URL,
+// /*        migrations: {
+//             directory: __dirname + "/db/migrations",
+//         },
+//          seeds: {
+//             directory: __dirname + "/db/seeds/production",
+//         } */
+//     }
+
+// });
+
 
 const db = knex;
-
-
 const artists = database.artists;
 const users = database.users;
 
@@ -212,6 +223,8 @@ app.put("/updateartist", (req, res) => {
 
 
 // -------------  // ENDPOINTS END // -------------- //
-app.listen(5000, () => {
-    console.log("The server is running on port 5000");
+
+const PORT = process.env.PORT? process.env.PORT: 5000;
+app.listen(PORT, () => {
+    console.log(`The server is running on port ${PORT}`);
 })
