@@ -10,7 +10,7 @@ const knex = require("knex")({
         //     password: "anVvPRpp",
         //     database: 'kulturaljka'
         // }
-        client: "pg",
+         client: "pg",
         connection: {
             connectionString: process.env.DATABASE_URL,
             ssl: true
@@ -45,11 +45,12 @@ const knex = require("knex")({
 // });
 
 
-const db = knex;
 /* const artists = database.artists;
 const users = database.users; */
 
 const app = express();
+const db = knex;
+
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
@@ -64,16 +65,19 @@ app.get("/", (req, res) => {
 // "/login"POST - receive login data and return response
 app.post("/login", (req, res) => {
     const {email, password} = req.body;
+
+
+    console.log(req.body);
     if(email && password){
         db("login").where(
             {
                 email: email
             }
-        ).select("*")
+        )
+        .select("*")
         //.then(console.log)
         .then(data => {
             if(data.length){
-                const passCheck = false;
                 bcrypt.compare(password, data[0].hash, function(err, match){
                     if(err){
                         console.log("errror checking credentials: ", err);
@@ -119,13 +123,18 @@ app.post("/login", (req, res) => {
 // "/register"POST - receive register data and return response
 app.post("/register", (req, res) => {
     const {name, email, password} = req.body;
+    
 
     if(name && email && password){
+        console.log(req.body);
         // check if same email already exists, bu in the eb
 
-        db("login").where({
-            email: email
-        }).select("email")
+        db("login").where(
+            {
+                email: email
+            }
+        )
+        .select("email")
         .then(data => {
             if(!data.length){
                 //userExists = false;
@@ -165,7 +174,7 @@ app.post("/register", (req, res) => {
                     )
             }  
         })
-        .catch(console.log)
+        .catch(err => console.log("Tu negdje", err));
     }
     else{
         res.json({
