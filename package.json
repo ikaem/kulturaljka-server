@@ -20,7 +20,7 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "knex": "^0.20.4",
+    "knex": "^2.4.0",
     "pg": "^7.15.0"
   },
   "devDependencies": {
